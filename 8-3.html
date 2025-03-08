@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quà Tặng 8/3</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            overflow: hidden;
+            font-family: 'Pecita', cursive;
+        }
+        .container {
+            position: relative;
+            text-align: center;
+            cursor: pointer;
+        }
+        .gift-box {
+            width: 185px;
+            height: 123px;
+            background: url('2.png') no-repeat center/cover;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+        }
+        .lid {
+            width: 196px;
+            height:145px;
+            background: url('1.png') no-repeat center/cover;
+            position: absolute;
+            top: -100px;
+            left: -5px;
+            transition: transform 0.5s ease-in-out;
+        }
+        .flower {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            margin-top: -40%;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            opacity: 0;
+            transition: transform 0.5s ease-in-out, opacity 0.5s;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #d63384;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: yellow;
+            opacity: 0.7;
+            border-radius: 50%;
+            animation: fall 1.5s linear infinite;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(200px);
+                opacity: 0;
+            }
+        }
+        .open .lid {
+            transform: rotate(-45deg) translateY(-50px);
+        }
+        .open .flower {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+        .open .message {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" onclick="openGift()">
+        <div class="gift-box">
+            <div class="lid"></div>
+        </div>
+        <img src="we.jpg" class="flower">
+        <div class="message">Chúc cho Huyền chăm chỉ, học giỏi...<br>
+            Chúc anh mau đạt được mục đích của mình để chăm lo cho gia đình và em...<br>
+            Cảm ơn em đã đến bên anh ❤️
+        </div>
+    </div>
+    <script>
+        function openGift() {
+            document.querySelector('.container').classList.add('open');
+            generateConfetti();
+        }
+
+        function generateConfetti() {
+            const confettiContainer = document.body;
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.top = Math.random() * window.innerHeight / 2 + "px";
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                confetti.style.animationDuration = (Math.random() * 1.5 + 0.5) + "s";
+                confettiContainer.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>
